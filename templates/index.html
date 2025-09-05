@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Recommendation System 🎬</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="hero">
+        <h1>Movie Recommendation System</h1>
+        <p>Find your next favorite movie 🍿</p>
+
+        <form method="POST">
+            <input type="text" name="movie_name" placeholder="Type a movie name..." required>
+            <button type="submit">Recommend</button>
+        </form>
+    </div>
+
+    {% if movie_name %}
+    <div class="recommendations">
+        <h2>Recommendations for "<span class="highlight">{{ movie_name }}</span>":</h2>
+        {% if recommendations %}
+            <div class="cards">
+                {% for movie in recommendations %}
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>{{ movie }}</h3>
+                            <p>Genre info here</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-result">No recommendations found 😢</p>
+        {% endif %}
+    </div>
+    {% endif %}
+</body>
+</html>
